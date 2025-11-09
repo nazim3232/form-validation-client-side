@@ -22,7 +22,7 @@ let form = document.querySelector('form');
     const useremail = userEmail.value.trim();
     const userpassword = userPassword.value.trim();
     const userpasswordTwo = userPassword2.value.trim();
-       
+       console.log(username, useremail, userpassword, userpasswordTwo)
 
     if(username === '')
     {
@@ -40,7 +40,7 @@ let form = document.querySelector('form');
     }
     else if(!isEmail(useremail))
     {
-          setErrorFor(userEmail, "User name can not be empty.")
+          setErrorFor(userEmail, "Enter a  valid email.")
     }
     else{
         setSuccessFor(userEmail);
@@ -56,15 +56,27 @@ let form = document.querySelector('form');
 
     if(userpasswordTwo ==='')
         {
- setErrorFor(userpasswordTwo, "Password can not be empty.")
+      setErrorFor(userPassword2, "Password can not be empty.")
         }
-        else if(userpassword != userPassword2)
+        else if(userpassword != userpasswordTwo)
         {
-            setErrorFor(userpasswordTwo,'password does notmatch')
+            setErrorFor(userPassword2,"password does notmatch")
         }
         else{
-            setSuccessFor(userpasswordTwo);
+            setSuccessFor(userPassword2);
         }
+
+        if(userName.parentElement.classList.contains('success')&& userEmail.parentElement.classList.contains('success') && userPassword.parentElement.classList.contains('success') && userPassword2.parentElement.classList.contains('success'))
+        {
+            alert("You have logged in sucessfully.")
+             form.reset();
+        userName.parentElement.classList.remove('success');
+        userEmail.parentElement.classList.remove('success');
+        userPassword.parentElement.classList.remove('success');
+         userPassword2.parentElement.classList.remove('success');
+        }
+
+       
    }
 
 
@@ -78,13 +90,13 @@ let form = document.querySelector('form');
     let small = mother.querySelector('small');
     //add the error message inside  the error class
     small.innerText= message;
-    mother.className = 'form-control error';
+    mother.classList.add('error');
    }
 
-   function  setSuccessFor(userName)
+   function  setSuccessFor(input)
    {
      const mother = input.parentElement;
-     mother.className = 'form-control success';
+    mother.classList.add('success');
    }
 function isEmail(email) {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
